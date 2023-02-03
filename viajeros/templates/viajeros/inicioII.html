@@ -1,0 +1,8 @@
+{% extends "viajeros/base.html" %}
+
+{% block subtitulo %}Inicio{% endblock subtitulo %}
+
+{% block contenido %}
+<h1>Bienvenido, {{ request.user.first_name }}</h1>
+
+{% endblock contenido %}

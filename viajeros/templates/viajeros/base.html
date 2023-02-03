@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Viajeros: {% block subtitulo %}{% endblock subtitulo %}</title>
+        <title>Argentina!! {% block subtitulo %}{% endblock subtitulo %}</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
         <!-- Bootstrap icons-->
@@ -28,18 +28,46 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="">Inicio</a>
-                <a class="navbar-brand" href="">Hola</a>
-                <a class="navbar-brand" href="">Lugares</a>
-                <a class="navbar-brand" href="">Recomendar</a>
                 
+                <a class="navbar-brand" href={% url 'listar_about_me'%}>Hola</a>
+                <a class="navbar-brand" href={% url 'listar_busquedas'%}>Buscar</a>
+                <a class="navbar-brand" href={% url 'listar_lugares'%}>Lugares</a>
+                <a class="navbar-brand" href={% url 'crear_lugar'%}>Recomendar</a>
+                {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div style="display: inline-flex;">
+                            <span style="padding: 0px 30px 0px 0px;">{{ user.username }}</span>
+                            <div>
+                                <img src="{{ user.avatar.imagen.url }}" style="width:50px;"/>
+                            </div>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar mis datos</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'agregar_avatar' %}">Agregar Avatar</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}"><strong>Cerrar Sesión</strong></a></li>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+                {% else %}
+                <a class="btn btn-primary" href="{% url 'login' %}">Iniciar sesión</a>
+                <a class="btn btn-secondary" href="{% url 'registro' %}">Registro</a>
+                {% endif %}
             </div>
         </nav>
-        
+
         <section style="padding:80px 50px;">
             {% block contenido %}
             {% endblock contenido %}
         </section>
+
 
         <!-- Footer-->
         <footer class="footer bg-light">

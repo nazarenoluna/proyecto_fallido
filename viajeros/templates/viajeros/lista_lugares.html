@@ -1,11 +1,19 @@
 {% extends "viajeros/base.html" %}
 
-{% block subtitulo %}Lugares y Recomendaciones{% endblock subtitulo %}
-
-
+{% block subtitulo %}Argentina!!!{{lugar.provincia}}{% endblock subtitulo %}
 
 {% block contenido %}
-
-
+<h1>{{ lugar.provincia }}</h1>
+<br>
+<h4>{{ lugar.ciudad }}</h4>
+<br>
+<h6>{{ lugar.descripcion }}</h6>
+<br>
+{% if lugar.imagen  %}
+  <img src="{{lugar.imagen.url }}" width="400" alt="" />
+{% endif %}
+<br>
+<h7>{{ lugar.autor }}</h7>
+<h7>{{ lugar.fecha_publicacion }}</h7>
 
 {% endblock contenido %}
